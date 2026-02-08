@@ -191,8 +191,5 @@
       "repo": "DeskThing",
       "releaseType": "release"
     }
-  },
-  "electronDownload": {
-    "mirror": "https://npmmirror.com/mirrors/electron/"
   }
 }
