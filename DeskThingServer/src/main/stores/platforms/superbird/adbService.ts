@@ -1,4 +1,4 @@
-import { handleAdbCommands } from '../../../handlers/adbHandler'
+import { handleAdbCommands } from '../../../handlers/adbHandlerHeadless'
 import logger from '@server/utils/logger'
 import { ClientConnectionMethod } from '@deskthing/types'
 import { join } from 'path'
