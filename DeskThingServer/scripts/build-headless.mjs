@@ -55,7 +55,8 @@ async function buildHeadlessServer() {
         'sharp',
         'auto-launch',
         'flashthing',
-        '@deskthing/types'
+        '@deskthing/types',
+        'electron-updater'
       ],
       alias: {
         '@shared': resolve(__dirname, '../src/shared'),

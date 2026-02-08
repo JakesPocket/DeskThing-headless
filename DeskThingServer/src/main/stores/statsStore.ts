@@ -6,6 +6,7 @@ import os from 'os'
 import { StatsStoreClass } from '@shared/stores/statsStore'
 import { handleError } from '@server/utils/errorHandler'
 import { SettingsStoreClass } from '@shared/stores/settingsStore'
+import { isDockerOrHeadless } from '@server/utils/environmentDetection'
 
 export class StatsStore implements StatsStoreClass {
   private stats: DeskThingStats | null = null
@@ -16,6 +17,7 @@ export class StatsStore implements StatsStoreClass {
   private collectStats = false
   private flushInterval: NodeJS.Timeout | null = null
   private readonly FLUSH_INTERVAL = 60 * 60 * 1000 * 12 // 12 hours
+  private _registrationSkipped = false // Track if registration was skipped or failed
 
   public get initialized(): boolean {
     return this._initialized
@@ -82,7 +84,17 @@ export class StatsStore implements StatsStoreClass {
   }
 
   private async ensureRegistration(): Promise<void> {
-    if (!this.stats || this._registered) return
+    if (!this.stats || this._registered || this._registrationSkipped) return
+
+    // Skip registration in Docker/headless environments
+    if (isDockerOrHeadless()) {
+      logger.debug('Skipping stats registration in Docker/headless environment', {
+        function: 'ensureRegistration',
+        source: 'statsStore'
+      })
+      this._registrationSkipped = true
+      return
+    }
 
     try {
       const machineData = await getMachineId()
@@ -97,11 +109,12 @@ export class StatsStore implements StatsStoreClass {
       await this.register(registration)
       this._registered = true
     } catch (error) {
-      logger.error('Failed to ensure registration', {
+      logger.debug('Stats registration failed or unavailable (network error)', {
         error: error as Error,
         function: 'ensureRegistration',
         source: 'statsStore'
       })
+      this._registrationSkipped = true
     }
   }
 
@@ -146,14 +159,23 @@ export class StatsStore implements StatsStoreClass {
     try {
       const result = await this.stats.register(registration)
       if (!result.success) {
-        throw new Error(result.error.message)
+        // For 403 errors, log at debug level
+        if (result.status === 403) {
+          logger.debug('Stats registration not available', {
+            function: 'register',
+            source: 'statsStore'
+          })
+        } else {
+          throw new Error(result.error.message)
+        }
+      } else {
+        logger.info('Registration successful', {
+          function: 'register',
+          source: 'statsStore'
+        })
       }
-      logger.info('Registration successful', {
-        function: 'register',
-        source: 'statsStore'
-      })
     } catch (error) {
-      logger.error('Failed to register', {
+      logger.debug('Stats registration skipped or unavailable', {
         error: error as Error,
         function: 'register',
         source: 'statsStore'

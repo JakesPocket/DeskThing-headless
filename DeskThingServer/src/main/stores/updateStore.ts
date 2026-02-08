@@ -1,12 +1,12 @@
 import { UpdateStoreClass, UpdateStoreEvents } from '@shared/stores/updateStore'
 import { CacheableStore, UpdateInfoType, UpdateProgressType } from '@shared/types'
 import EventEmitter from 'node:events'
-import electronUpdater, { type AppUpdater } from 'electron-updater'
+import type { AppUpdater } from 'electron-updater'
 import Logger from '@server/utils/logger'
 import { LOGGING_LEVELS } from '@deskthing/types'
 import { handleError } from '@server/utils/errorHandler'
-import { app } from 'electron'
 import { satisfies } from 'semver'
+import { isDockerOrHeadless } from '@server/utils/environmentDetection'
 
 export class UpdateStore
   extends EventEmitter<UpdateStoreEvents>
@@ -24,8 +24,11 @@ export class UpdateStore
   constructor() {
     super()
 
-    // Defer initializing for a couple of seconds
-    setTimeout(this.initialize, 5000)
+    // Skip auto-initialization in Docker/headless environments
+    if (!isDockerOrHeadless()) {
+      // Defer initializing for a couple of seconds
+      setTimeout(this.initialize, 5000)
+    }
   }
 
   clearCache: () => Promise<void> = async () => {}
@@ -39,7 +42,26 @@ export class UpdateStore
       function: 'initialize'
     })
 
+    // Skip auto-updater in Docker/headless environments
+    if (isDockerOrHeadless()) {
+      Logger.info(
+        'Auto-updater disabled in Docker/headless environment. Updates should be managed via container image rebuilds from GHCR.',
+        {
+          source: 'UpdateStore',
+          function: 'initialize'
+        }
+      )
+      this._initialized = true
+      return
+    }
+
+    // Dynamically import Electron modules to avoid loading them in headless mode
+    const [electronUpdater, electron] = await Promise.all([
+      import('electron-updater'),
+      import('electron')
+    ])
     const { autoUpdater } = electronUpdater
+    const { app } = electron
     this._autoUpdater = autoUpdater
 
     this._autoUpdater.logger = {
@@ -102,8 +124,10 @@ export class UpdateStore
   }
 
   checkForUpdates = async (): Promise<string> => {
-    if (!this._autoUpdater) return 'AutoUpdater not initialized'
+    if (!this._autoUpdater) return 'AutoUpdater not available in Docker/headless mode'
 
+    // Dynamically import Electron app to get version
+    const { app } = await import('electron')
     const appVersion = app.getVersion()
 
     try {
