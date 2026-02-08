@@ -109,7 +109,7 @@ export class StatsStore implements StatsStoreClass {
       await this.register(registration)
       this._registered = true
     } catch (error) {
-      logger.debug('Stats registration skipped or unavailable', {
+      logger.debug('Stats registration failed or unavailable (network error)', {
         error: error as Error,
         function: 'ensureRegistration',
         source: 'statsStore'
