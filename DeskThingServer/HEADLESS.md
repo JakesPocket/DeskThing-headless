@@ -47,15 +47,23 @@ By default, the server stores data in the `./data` directory relative to the cur
 The server supports the following environment variables:
 
 - `NODE_ENV` - Set to `development` or `production`
+- `DESKTHING_PORT` - Port for the server (default: 8891)
 - Standard Node.js environment variables
+
+Example:
+```bash
+DESKTHING_PORT=3001 node dist/server-only.js
+```
 
 ## Server Endpoints
 
 Once running, the server provides:
 
-- Web Dashboard: `http://localhost:8891/`
-- WebSocket: `ws://localhost:8891/`
-- Client Interface: `http://localhost:8891/client/`
+- Web Dashboard: `http://localhost:8891/` (or the port specified by `DESKTHING_PORT`)
+- WebSocket: `ws://localhost:8891/` (or the port specified by `DESKTHING_PORT`)
+- Client Interface: `http://localhost:8891/client/` (or the port specified by `DESKTHING_PORT`)
+
+**Note**: The web dashboard and WebSocket hardware bridge run on the same port by design, as they share the same HTTP server instance.
 
 ## Differences from Full Application
 

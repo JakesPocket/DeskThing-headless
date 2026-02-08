@@ -6,7 +6,7 @@ import { ADBPlatformHeadless } from './superbird/adbPlatformHeadless'
 /**
  * Headless version of platform initializer - no Electron dependencies
  */
-export async function initializePlatformsHeadless(): Promise<void> {
+export async function initializePlatformsHeadless(port: number = 8891): Promise<void> {
   try {
     const platformStore = await storeProvider.getStore('platformStore')
 
@@ -17,9 +17,9 @@ export async function initializePlatformsHeadless(): Promise<void> {
     await platformStore.registerPlatform(wsPlatform)
     await platformStore.registerPlatform(adbPlatform)
 
-    // Start the WebSocket platform on port 8891
+    // Start the WebSocket platform on the specified port
     await platformStore.startPlatform(wsPlatform.id, {
-      port: 8891,
+      port: port,
       address: '0.0.0.0'
     })
 
@@ -28,7 +28,7 @@ export async function initializePlatformsHeadless(): Promise<void> {
       autoDetect: true
     })
 
-    Logger.debug('Platforms initialized successfully (headless mode)', {
+    Logger.debug(`Platforms initialized successfully (headless mode) on port ${port}`, {
       source: 'platformInitializerHeadless',
       function: 'initializePlatformsHeadless'
     })

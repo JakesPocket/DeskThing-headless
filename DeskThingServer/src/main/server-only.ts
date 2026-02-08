@@ -26,10 +26,15 @@ if (process.env.NODE_ENV === 'development') {
 // Set up user data path for Node.js environment
 const userDataPath = join(process.cwd(), 'data')
 
+// Configuration - can be overridden with environment variables
+const SERVER_PORT = parseInt(process.env.DESKTHING_PORT || '8891', 10)
+
+// Initialize modules
 async function startServer(): Promise<void> {
   try {
     console.log('Starting DeskThing headless server...')
     console.log(`User data path: ${userDataPath}`)
+    console.log(`Server port: ${SERVER_PORT}`)
 
     // Initialize user data path
     const { initUserDataPath } = await import('./utils/pathsHeadless')
@@ -43,11 +48,12 @@ async function startServer(): Promise<void> {
     // Initialize platforms (WebSocket and ADB)
     console.log('Initializing platforms...')
     const { initializePlatformsHeadless } = await import('./stores/platforms/platformInitializerHeadless')
-    await initializePlatformsHeadless()
+    await initializePlatformsHeadless(SERVER_PORT)
 
     console.log('Server started successfully!')
-    console.log('Web dashboard available at: http://localhost:8891')
-    console.log('WebSocket hardware bridge running on port 8891')
+    console.log(`Web dashboard available at: http://localhost:${SERVER_PORT}/`)
+    console.log(`Client interface available at: http://localhost:${SERVER_PORT}/client/`)
+    console.log(`WebSocket hardware bridge running on port ${SERVER_PORT}`)
   } catch (error) {
     console.error('Error starting server:', error)
     process.exit(1)
