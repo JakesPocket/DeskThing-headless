@@ -8,7 +8,7 @@
  * Detection methods:
  * - Checks for /.dockerenv file (standard Docker indicator)
  * - Checks DOCKER environment variable
- * - Checks if Electron app is not available (headless Node.js mode)
+ * - Checks if the process was started via server-only.js (headless mode)
  * 
  * @returns true if running in Docker or headless mode
  */
@@ -28,14 +28,26 @@ export function isDockerOrHeadless(): boolean {
     // Ignore errors
   }
 
-  // Check if we're in headless mode (no Electron)
+  // Check if we're running the headless server (server-only.js)
+  // This is more reliable than checking for Electron availability
+  if (process.argv[1]?.includes('server-only.js')) {
+    return true
+  }
+
+  // Check if Electron app is available (this is the fallback)
   try {
-    require('electron')
-    return false
+    const electron = require('electron')
+    // If electron.app is available, we're in Electron mode
+    if (electron.app) {
+      return false
+    }
   } catch {
     // Electron not available = headless mode
     return true
   }
+
+  // Default to false (Electron mode) if we can't determine
+  return false
 }
 
 /**
