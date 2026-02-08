@@ -13,6 +13,7 @@
 # data files
 data.json
 DeskThing/server/auth_data.json
+DeskThingServer/data/
 
 # testing
 /coverage
