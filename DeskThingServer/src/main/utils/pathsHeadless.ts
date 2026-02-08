@@ -29,7 +29,8 @@ export function getResourcesPath(...pathSegments: string[]): string {
     return join(process.cwd(), 'resources', ...pathSegments)
   }
 
-  // In production mode for headless server
+  // In production mode - resources could be in different location
+  // For now, same as development, but can be customized for production deployments
   return join(process.cwd(), 'resources', ...pathSegments)
 }
 

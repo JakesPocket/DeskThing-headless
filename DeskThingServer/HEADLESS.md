@@ -84,7 +84,11 @@ Press `Ctrl+C` to stop the server.
 
 ### Port Already in Use
 
-If port 8891 is already in use, you'll see an error message. Stop the conflicting service or modify the port in the platform initializer.
+If port 8891 is already in use, you'll see an error message. You can change the port using the `DESKTHING_PORT` environment variable:
+
+```bash
+DESKTHING_PORT=3001 npm run start:headless
+```
 
 ### Missing Dependencies
 
