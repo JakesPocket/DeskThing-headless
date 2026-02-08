@@ -47,7 +47,6 @@ async function buildHeadlessServer() {
       format: 'esm',
       outfile: resolve(__dirname, '../dist/server-only.js'),
       external: [
-        'electron',
         'sharp',
         'auto-launch',
         'flashthing',
@@ -56,7 +55,9 @@ async function buildHeadlessServer() {
       alias: {
         '@shared': resolve(__dirname, '../src/shared'),
         '@server': resolve(__dirname, '../src/main'),
-        '@processes': resolve(__dirname, '../src/main/processes')
+        '@processes': resolve(__dirname, '../src/main/processes'),
+        'electron': resolve(__dirname, '../src/main/utils/electronShim.ts'),
+        'electron/main': resolve(__dirname, '../src/main/utils/electronShim.ts')
       },
       plugins: [modulePathPlugin],
       banner: {
