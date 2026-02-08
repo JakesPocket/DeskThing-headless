@@ -92,8 +92,55 @@ async function buildHeadlessServer() {
       }
     });
     
+    // Build the app process worker as a separate bundle
+    await build({
+      entryPoints: [resolve(__dirname, '../src/main/processes/appProcess.ts')],
+      bundle: true,
+      platform: 'node',
+      target: 'node18',
+      format: 'esm',
+      outfile: resolve(__dirname, '../dist/appProcess.js'),
+      external: [
+        'sharp',
+        '@deskthing/types'
+      ],
+      alias: {
+        '@shared': resolve(__dirname, '../src/shared'),
+        '@server': resolve(__dirname, '../src/main'),
+        '@processes': resolve(__dirname, '../src/main/processes')
+      },
+      banner: {
+        js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
+      }
+    });
+    
+    // Build the flash process worker as a separate bundle
+    await build({
+      entryPoints: [resolve(__dirname, '../src/main/processes/flashProcess.ts')],
+      bundle: true,
+      platform: 'node',
+      target: 'node18',
+      format: 'esm',
+      outfile: resolve(__dirname, '../dist/flashProcess.js'),
+      external: [
+        'sharp',
+        'flashthing',
+        '@deskthing/types'
+      ],
+      alias: {
+        '@shared': resolve(__dirname, '../src/shared'),
+        '@server': resolve(__dirname, '../src/main'),
+        '@processes': resolve(__dirname, '../src/main/processes')
+      },
+      banner: {
+        js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
+      }
+    });
+    
     console.log('✓ Headless server built successfully at dist/server-only.js');
     console.log('✓ WebSocket worker built successfully at dist/wsWebsocket.js');
+    console.log('✓ App process worker built successfully at dist/appProcess.js');
+    console.log('✓ Flash process worker built successfully at dist/flashProcess.js');
   } catch (error) {
     console.error('Build failed:', error);
     process.exit(1);
