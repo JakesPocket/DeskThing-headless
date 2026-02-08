@@ -7,6 +7,7 @@ import { LOGGING_LEVELS } from '@deskthing/types'
 import { handleError } from '@server/utils/errorHandler'
 import { app } from 'electron'
 import { satisfies } from 'semver'
+import { isDockerOrHeadless } from '@server/utils/environmentDetection'
 
 export class UpdateStore
   extends EventEmitter<UpdateStoreEvents>
@@ -38,6 +39,19 @@ export class UpdateStore
       source: 'UpdateStore',
       function: 'initialize'
     })
+
+    // Skip auto-updater in Docker/headless environments
+    if (isDockerOrHeadless()) {
+      Logger.info(
+        'Auto-updater disabled in Docker/headless environment. Updates should be managed via container image rebuilds from GHCR.',
+        {
+          source: 'UpdateStore',
+          function: 'initialize'
+        }
+      )
+      this._initialized = true
+      return
+    }
 
     const { autoUpdater } = electronUpdater
     this._autoUpdater = autoUpdater
@@ -102,7 +116,7 @@ export class UpdateStore
   }
 
   checkForUpdates = async (): Promise<string> => {
-    if (!this._autoUpdater) return 'AutoUpdater not initialized'
+    if (!this._autoUpdater) return 'AutoUpdater not available in Docker/headless mode'
 
     const appVersion = app.getVersion()
 

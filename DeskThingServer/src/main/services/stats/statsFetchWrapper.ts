@@ -66,13 +66,24 @@ export class DeskThingStats {
 
       if (response.ok) return { success: true, status: response.status }
       else {
-        logger.error(
-          `Failed to register client: ${response.status} - ${response.statusText}. Registering with headers ${JSON.stringify(headers)} and registration data: ${stringifiedData}`,
-          {
-            function: 'register',
-            source: 'statsFetchWrapper'
-          }
-        )
+        // Log at debug level for 403 errors (common in Docker/headless environments)
+        if (response.status === 403) {
+          logger.debug(
+            `Stats registration unavailable (${response.status} - ${response.statusText})`,
+            {
+              function: 'register',
+              source: 'statsFetchWrapper'
+            }
+          )
+        } else {
+          logger.error(
+            `Failed to register client: ${response.status} - ${response.statusText}. Registering with headers ${JSON.stringify(headers)} and registration data: ${stringifiedData}`,
+            {
+              function: 'register',
+              source: 'statsFetchWrapper'
+            }
+          )
+        }
         return {
           success: false,
           status: response.status,

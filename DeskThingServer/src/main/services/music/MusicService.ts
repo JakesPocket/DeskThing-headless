@@ -27,6 +27,7 @@ export class MusicService implements MusicStoreClass {
   private songCache: SongCache
   private colorExtractor: ColorExtractor
   private _initialized: boolean = false
+  private _noAudioSourceWarningShown: boolean = false // Track if we've already warned about missing audio source
 
   public get initialized(): boolean {
     return this._initialized
@@ -334,12 +335,18 @@ export class MusicService implements MusicStoreClass {
       return this.currentApp
     }
 
-    Logger.log(LOGGING_LEVELS.LOG, `Current app not set, attempting to find one`)
+    Logger.debug(`Current app not set, attempting to find one`, {
+      domain: 'music',
+      function: 'findCurrentPlaybackSource'
+    })
 
     // Try to get from settings
     const settings = await this.settingsStore.getSettings()
     if (settings?.music_playbackLocation && settings.music_playbackLocation !== 'none') {
-      Logger.log(LOGGING_LEVELS.LOG, `Found ${settings.music_playbackLocation} in settings`)
+      Logger.debug(`Found ${settings.music_playbackLocation} in settings`, {
+        domain: 'music',
+        function: 'findCurrentPlaybackSource'
+      })
       return settings.music_playbackLocation
     }
 
@@ -352,14 +359,28 @@ export class MusicService implements MusicStoreClass {
       return audioSource.name
     }
 
-    Logger.log(LOGGING_LEVELS.LOG, `No audio source app found`)
+    // Only log the warning once
+    if (!this._noAudioSourceWarningShown) {
+      Logger.log(
+        LOGGING_LEVELS.WARN,
+        `No audio source app found. To enable music playback, install an audio app (e.g., Spotify, YouTube Music) from the Apps page.`,
+        {
+          domain: 'music',
+          function: 'findCurrentPlaybackSource'
+        }
+      )
+      this._noAudioSourceWarningShown = true
+    }
     return null
   }
 
   private async getPlaybackSource(): Promise<string | null> {
     // Check if music is disabled
     if (this.currentApp === 'disabled') {
-      Logger.log(LOGGING_LEVELS.LOG, `Music is disabled`)
+      Logger.debug(`Music is disabled`, {
+        domain: 'music',
+        function: 'getPlaybackSource'
+      })
       const settings = await this.settingsStore.getSettings()
       if (!settings || settings.music_refreshInterval > 0) {
         await this.settingsStore.saveSetting('music_refreshInterval', -1)
@@ -375,7 +396,7 @@ export class MusicService implements MusicStoreClass {
         await this.settingsStore.saveSetting('music_playbackLocation', app)
         return app
       } else {
-        Logger.log(LOGGING_LEVELS.ERROR, `No audio source found. Please install an audio app.`)
+        // Warning already shown in findCurrentPlaybackSource
         return null
       }
     }
@@ -386,10 +407,16 @@ export class MusicService implements MusicStoreClass {
       const currentApp = settings?.music_playbackLocation
 
       if (!currentApp) {
-        Logger.log(LOGGING_LEVELS.ERROR, `No playback location set in settings`)
+        Logger.debug(`No playback location set in settings`, {
+          domain: 'music',
+          function: 'getPlaybackSource'
+        })
         return null
       } else {
-        Logger.log(LOGGING_LEVELS.WARN, `Setting playback location to ${currentApp}`)
+        Logger.debug(`Setting playback location to ${currentApp}`, {
+          domain: 'music',
+          function: 'getPlaybackSource'
+        })
         this.currentApp = currentApp
       }
     }
@@ -397,7 +424,10 @@ export class MusicService implements MusicStoreClass {
     // Verify the app exists and is running
     const app = await getAppByName(this.currentApp)
     if (!app || app.running === false) {
-      Logger.log(LOGGING_LEVELS.ERROR, `App ${this.currentApp} is not found or not running`)
+      Logger.debug(`App ${this.currentApp} is not found or not running`, {
+        domain: 'music',
+        function: 'getPlaybackSource'
+      })
       return null
     }
 
@@ -415,10 +445,16 @@ export class MusicService implements MusicStoreClass {
     }
 
     const currentApp = await this.getPlaybackSource()
-    Logger.log(LOGGING_LEVELS.LOG, `Attempting to refresh music data`)
+    Logger.debug(`Attempting to refresh music data`, {
+      domain: 'music',
+      function: 'refreshMusicData'
+    })
 
     if (!currentApp) {
-      Logger.log(LOGGING_LEVELS.LOG, `No playback source available`)
+      Logger.debug(`No playback source available`, {
+        domain: 'music',
+        function: 'refreshMusicData'
+      })
       return
     }
 
