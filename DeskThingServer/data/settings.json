@@ -1,0 +1,28 @@
+{
+  "version": "0.0.0-headless",
+  "server_LogLevel": "log",
+  "server_LogContext": [
+    "app",
+    "client",
+    "server"
+  ],
+  "server_autoStart": false,
+  "server_startMinimized": false,
+  "server_minimizeApp": true,
+  "server_localIp": [
+    "10.1.0.196"
+  ],
+  "server_callbackPort": 8888,
+  "device_devicePort": 8891,
+  "device_address": "0.0.0.0",
+  "music_playbackLocation": "none",
+  "music_refreshInterval": 15000,
+  "adb_useGlobal": false,
+  "adb_autoConfig": false,
+  "adb_autoDetect": true,
+  "adb_blacklist": [],
+  "flag_firstClose": true,
+  "flag_hasOpened": false,
+  "flag_collectStats": true,
+  "flag_nerd": false
+}

@@ -1,0 +1,859 @@
+{
+  "id": "default-profile",
+  "label": "Default Profile",
+  "version": "0.11.0",
+  "created": "2026-02-08T18:32:24.654Z",
+  "enabled": true,
+  "mapping": {
+    "mapping": {
+      "Wheel1": {
+        "1": {
+          "enabled": true,
+          "id": "pref",
+          "source": "server",
+          "value": "0"
+        }
+      },
+      "Wheel2": {
+        "1": {
+          "enabled": true,
+          "id": "pref",
+          "source": "server",
+          "value": "1"
+        }
+      },
+      "Wheel3": {
+        "1": {
+          "enabled": true,
+          "id": "pref",
+          "source": "server",
+          "value": "2"
+        }
+      },
+      "Wheel4": {
+        "1": {
+          "enabled": true,
+          "id": "pref",
+          "source": "server",
+          "value": "3"
+        }
+      },
+      "Tray1": {
+        "1": {
+          "enabled": true,
+          "id": "pref",
+          "source": "server",
+          "value": "0"
+        }
+      },
+      "Tray2": {
+        "1": {
+          "enabled": true,
+          "id": "pref",
+          "source": "server",
+          "value": "1"
+        }
+      },
+      "Tray3": {
+        "1": {
+          "enabled": true,
+          "id": "pref",
+          "source": "server",
+          "value": "2"
+        }
+      },
+      "Tray4": {
+        "1": {
+          "enabled": true,
+          "id": "pref",
+          "source": "server",
+          "value": "3"
+        }
+      },
+      "Tray5": {
+        "1": {
+          "enabled": true,
+          "id": "pref",
+          "source": "server",
+          "value": "4"
+        }
+      },
+      "Tray6": {
+        "1": {
+          "enabled": true,
+          "id": "pref",
+          "source": "server",
+          "value": "5"
+        }
+      },
+      "DynamicAction1": {
+        "1": {
+          "id": "shuffle",
+          "source": "server",
+          "value": "toggle",
+          "enabled": true
+        }
+      },
+      "DynamicAction2": {
+        "1": {
+          "id": "repeat",
+          "source": "server",
+          "enabled": true
+        }
+      },
+      "DynamicAction3": {
+        "1": {
+          "id": "rewind",
+          "value": "stop",
+          "source": "server",
+          "enabled": true
+        }
+      },
+      "DynamicAction4": {
+        "1": {
+          "id": "hidden",
+          "source": "server",
+          "enabled": true
+        }
+      },
+      "Action5": {
+        "1": {
+          "id": "hidden",
+          "source": "server",
+          "enabled": true
+        }
+      },
+      "Action6": {
+        "1": {
+          "id": "play",
+          "source": "server",
+          "enabled": true
+        }
+      },
+      "Action7": {
+        "1": {
+          "id": "skip",
+          "source": "server",
+          "enabled": true
+        }
+      },
+      "Digit1": {
+        "10": {
+          "id": "pref",
+          "source": "server",
+          "value": "0",
+          "enabled": true
+        },
+        "11": {
+          "id": "swap",
+          "source": "server",
+          "value": "0",
+          "enabled": true
+        }
+      },
+      "Digit2": {
+        "10": {
+          "id": "pref",
+          "source": "server",
+          "value": "1",
+          "enabled": true
+        },
+        "11": {
+          "id": "swap",
+          "source": "server",
+          "value": "1",
+          "enabled": true
+        }
+      },
+      "Digit3": {
+        "10": {
+          "id": "pref",
+          "source": "server",
+          "value": "2",
+          "enabled": true
+        },
+        "11": {
+          "id": "swap",
+          "source": "server",
+          "value": "2",
+          "enabled": true
+        }
+      },
+      "Digit4": {
+        "10": {
+          "id": "pref",
+          "source": "server",
+          "value": "3",
+          "enabled": true
+        },
+        "11": {
+          "id": "swap",
+          "source": "server",
+          "value": "3",
+          "enabled": true
+        }
+      },
+      "KeyM": {
+        "10": {
+          "id": "open",
+          "source": "server",
+          "value": "dashboard",
+          "enabled": true
+        },
+        "11": {
+          "id": "open",
+          "value": "utility",
+          "source": "server",
+          "enabled": true
+        }
+      },
+      "Scroll": {
+        "2": {
+          "id": "volup",
+          "value": "15",
+          "source": "server",
+          "enabled": true
+        },
+        "3": {
+          "id": "voldown",
+          "value": "15",
+          "source": "server",
+          "enabled": true
+        },
+        "4": {
+          "id": "voldown",
+          "value": "15",
+          "source": "server",
+          "enabled": true
+        },
+        "5": {
+          "id": "volup",
+          "value": "15",
+          "source": "server",
+          "enabled": true
+        }
+      },
+      "Enter": {
+        "1": {
+          "id": "wheel",
+          "source": "server",
+          "enabled": true
+        },
+        "11": {
+          "id": "skip",
+          "source": "server",
+          "enabled": true
+        }
+      },
+      "Escape": {
+        "10": {
+          "id": "appslist",
+          "value": "show",
+          "source": "server",
+          "enabled": true
+        },
+        "11": {
+          "id": "appslist",
+          "value": "hide",
+          "source": "server",
+          "enabled": true
+        }
+      },
+      "Swipe": {
+        "6": {
+          "id": "appslist",
+          "value": "hide",
+          "source": "server",
+          "enabled": true
+        },
+        "7": {
+          "id": "appslist",
+          "value": "show",
+          "source": "server",
+          "enabled": true
+        },
+        "8": {
+          "id": "swipel",
+          "source": "server",
+          "enabled": true
+        },
+        "9": {
+          "id": "swiper",
+          "source": "server",
+          "enabled": true
+        }
+      }
+    },
+    "keys": [
+      {
+        "id": "Wheel1",
+        "source": "server",
+        "description": "A wheel button",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Wheel2",
+        "source": "server",
+        "description": "A wheel button",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Wheel3",
+        "source": "server",
+        "description": "A wheel button",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Wheel4",
+        "source": "server",
+        "description": "A wheel button",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Tray1",
+        "source": "server",
+        "description": "The app tray button",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Tray2",
+        "source": "server",
+        "description": "The app tray button",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Tray3",
+        "source": "server",
+        "description": "The app tray button",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Tray4",
+        "source": "server",
+        "description": "The app tray button",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Tray5",
+        "source": "server",
+        "description": "The app tray button",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Tray6",
+        "source": "server",
+        "description": "The app tray button",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "DynamicAction1",
+        "source": "server",
+        "description": "First dynamic action button on the miniplayer",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "DynamicAction2",
+        "source": "server",
+        "description": "Second dynamic action button on the miniplayer",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "DynamicAction3",
+        "source": "server",
+        "description": "Third dynamic action button on the miniplayer",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "DynamicAction4",
+        "source": "server",
+        "description": "Fourth dynamic action button on the miniplayer",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Action5",
+        "source": "server",
+        "description": "Fifth action button, always visible on the miniplayer",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Action6",
+        "source": "server",
+        "description": "Sixth action button, always visible on the miniplayer",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Action7",
+        "source": "server",
+        "description": "Seventh action button, always visible on the miniplayer",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          1
+        ]
+      },
+      {
+        "id": "Digit1",
+        "source": "server",
+        "description": "Physical Button Digit1",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          10,
+          11,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "Digit2",
+        "source": "server",
+        "description": "Physical Button Digit2",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          10,
+          11,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "Digit3",
+        "source": "server",
+        "description": "Physical Button Digit3",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          10,
+          11,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "Digit4",
+        "source": "server",
+        "description": "Physical Button Digit4",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          10,
+          11,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "KeyM",
+        "source": "server",
+        "description": "Physical Button M",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          10,
+          11,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "Scroll",
+        "source": "server",
+        "description": "Physical Button Scroll",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": "Enter",
+        "source": "server",
+        "description": "Physical Button Enter",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          10,
+          11,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "Escape",
+        "source": "server",
+        "description": "Physical Button Escape",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          10,
+          11,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "Swipe",
+        "source": "server",
+        "description": "Touchpad Swipe Button",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "modes": [
+          6,
+          7,
+          8,
+          9
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "name": "Toggle Wheel",
+        "id": "wheel",
+        "icon": "wheel",
+        "description": "Opens the selection wheel",
+        "source": "server",
+        "version": "0.9.1",
+        "version_code": 9.1,
+        "enabled": true,
+        "tag": "nav"
+      },
+      {
+        "name": "Shuffle",
+        "id": "shuffle",
+        "value": "toggle",
+        "value_options": [
+          "off",
+          "toggle",
+          "on"
+        ],
+        "value_instructions": "Toggles the shuffle setting",
+        "description": "Shuffles the song",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "media"
+      },
+      {
+        "name": "Rewind",
+        "id": "rewind",
+        "value": "rewind",
+        "value_options": [
+          "rewind",
+          "stop"
+        ],
+        "value_instructions": "Determines if the song should skip to 0 and then skip to previous track or just skip to previous track",
+        "description": "Rewinds the song",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "media"
+      },
+      {
+        "name": "PlayPause",
+        "id": "play",
+        "icon": "play",
+        "description": "Plays or Pauses the song",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "media"
+      },
+      {
+        "name": "Skip",
+        "id": "skip",
+        "description": "Skips the song",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "media"
+      },
+      {
+        "name": "Repeat",
+        "id": "repeat",
+        "description": "Toggles repeat",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "media"
+      },
+      {
+        "name": "Open Tray App",
+        "id": "pref",
+        "value": "0",
+        "value_instructions": "The index of the app to open",
+        "description": "Opens the app at the index in the value",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "nav"
+      },
+      {
+        "name": "Swap Apps",
+        "id": "swap",
+        "value": "0",
+        "value_instructions": "The index of the app to swap with the current app",
+        "description": "Swaps the current app with the selected one",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "nav"
+      },
+      {
+        "name": "Volume Down",
+        "id": "voldown",
+        "value": "15",
+        "value_instructions": "The amount of volume to change by",
+        "description": "Turns the volume down",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "media"
+      },
+      {
+        "name": "Volume Up",
+        "id": "volup",
+        "value": "15",
+        "value_instructions": "The amount of volume to change by",
+        "description": "Turns the volume up",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "media"
+      },
+      {
+        "name": "Open App",
+        "id": "open",
+        "value": "utility",
+        "value_instructions": "The id of the app to open",
+        "description": "Opens the app defined in the value",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "nav"
+      },
+      {
+        "name": "Toggle AppsList",
+        "id": "appslist",
+        "value": "toggle",
+        "value_options": [
+          "hide",
+          "toggle",
+          "show"
+        ],
+        "value_instructions": "How the button behaves",
+        "description": "Toggles the apps list.",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "nav"
+      },
+      {
+        "name": "Open Previous",
+        "id": "swipel",
+        "description": "Opens the app at the previous index",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "nav"
+      },
+      {
+        "name": "Open Next",
+        "id": "swiper",
+        "description": "Opens the app at the next index",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "nav"
+      },
+      {
+        "name": "Hidden Button",
+        "id": "hidden",
+        "description": "Hides the button. Has no action",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "basic"
+      },
+      {
+        "name": "Fullscreen",
+        "id": "fullscreen",
+        "description": "Toggles Fullscreen on most devices",
+        "source": "server",
+        "version": "0.9.0",
+        "version_code": 9,
+        "enabled": true,
+        "tag": "nav"
+      }
+    ],
+    "profileId": "default-mapping"
+  },
+  "clientConfig": {
+    "profileId": "default-config",
+    "version": "0.11.0",
+    "appTrayState": "hidden",
+    "volume": "wheel",
+    "ShowNotifications": false,
+    "Screensaver": {
+      "name": "dashboard",
+      "enabled": false,
+      "running": false,
+      "timeStarted": 0,
+      "prefIndex": 0,
+      "manifest": {
+        "id": "",
+        "label": "",
+        "requires": [],
+        "version": "",
+        "description": "",
+        "author": "",
+        "platforms": [],
+        "homepage": "",
+        "repository": "",
+        "updateUrl": "",
+        "tags": [],
+        "requiredVersions": {
+          "server": "",
+          "client": ""
+        },
+        "template": "",
+        "version_code": 0,
+        "compatible_server": [],
+        "compatible_client": [],
+        "isAudioSource": false,
+        "isScreenSaver": false,
+        "isLocalApp": false,
+        "isWebApp": false
+      }
+    },
+    "currentView": {
+      "name": "dashboard",
+      "enabled": true,
+      "running": true,
+      "timeStarted": 0,
+      "prefIndex": 0
+    },
+    "ScreensaverType": {
+      "version": "0.11.0",
+      "type": "clock"
+    },
+    "onboarding": true,
+    "showPullTabs": true,
+    "saveLocation": true,
+    "use24hour": false
+  },
+  "description": "Default DeskThing Profile",
+  "colors": {
+    "background": "#ffffff",
+    "text": "#1a3327",
+    "accent": "#22c55e",
+    "highlight": "#dcfce7"
+  }
+}
