@@ -1,4 +1,3 @@
-console.log('[ADB Handler] Starting')
 import path from 'path'
 import { execFile } from 'child_process'
 import getPlatform from '@server/utils/get-platform'
@@ -58,8 +57,8 @@ export const handleAdbCommands = async (command: string): Promise<string> => {
             `ADB Error: STDERR: ${stderr}  STDOUT: ${stdout}, COMMAND: ${command}, PATH: ${adbPath}`,
             {
               error: error as Error,
-              function: 'adbHandler',
-              source: 'adbHandler'
+              function: 'adbHandlerHeadless',
+              source: 'adbHandlerHeadless'
             }
           )
           reject(new Error(`ADB Error: ${stderr}, ${command}, ${adbPath}`))
