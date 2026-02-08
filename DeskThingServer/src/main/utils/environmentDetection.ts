@@ -1,6 +1,7 @@
 /**
  * Environment detection utilities for Docker and headless mode
  */
+import { existsSync } from 'fs'
 
 /**
  * Detects if the application is running in a Docker container or headless mode.
@@ -20,8 +21,7 @@ export function isDockerOrHeadless(): boolean {
 
   // Check for .dockerenv file (standard Docker indicator)
   try {
-    const fs = require('fs')
-    if (fs.existsSync('/.dockerenv')) {
+    if (existsSync('/.dockerenv')) {
       return true
     }
   } catch {
@@ -35,6 +35,7 @@ export function isDockerOrHeadless(): boolean {
   }
 
   // Check if Electron app is available (this is the fallback)
+  // Using dynamic require to avoid import issues in headless builds
   try {
     const electron = require('electron')
     // If electron.app is available, we're in Electron mode

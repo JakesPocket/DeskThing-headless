@@ -17,7 +17,7 @@ export class StatsStore implements StatsStoreClass {
   private collectStats = false
   private flushInterval: NodeJS.Timeout | null = null
   private readonly FLUSH_INTERVAL = 60 * 60 * 1000 * 12 // 12 hours
-  private _registrationFailed = false // Track if registration has already failed
+  private _registrationSkipped = false // Track if registration was skipped or failed
 
   public get initialized(): boolean {
     return this._initialized
@@ -84,7 +84,7 @@ export class StatsStore implements StatsStoreClass {
   }
 
   private async ensureRegistration(): Promise<void> {
-    if (!this.stats || this._registered || this._registrationFailed) return
+    if (!this.stats || this._registered || this._registrationSkipped) return
 
     // Skip registration in Docker/headless environments
     if (isDockerOrHeadless()) {
@@ -92,7 +92,7 @@ export class StatsStore implements StatsStoreClass {
         function: 'ensureRegistration',
         source: 'statsStore'
       })
-      this._registrationFailed = true
+      this._registrationSkipped = true
       return
     }
 
@@ -114,7 +114,7 @@ export class StatsStore implements StatsStoreClass {
         function: 'ensureRegistration',
         source: 'statsStore'
       })
-      this._registrationFailed = true
+      this._registrationSkipped = true
     }
   }
 

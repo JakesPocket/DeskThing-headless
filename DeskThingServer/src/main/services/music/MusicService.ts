@@ -363,7 +363,7 @@ export class MusicService implements MusicStoreClass {
     if (!this._noAudioSourceWarningShown) {
       Logger.log(
         LOGGING_LEVELS.WARN,
-        `No audio source app found. To enable music playback, install an audio app (e.g., Spotify, YouTube Music) from the Apps page.`,
+        `No audio source app found. To enable music playback, install an audio app (such as Spotify or YouTube Music) from the Apps page.`,
         {
           domain: 'music',
           function: 'findCurrentPlaybackSource'
