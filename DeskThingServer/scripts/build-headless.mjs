@@ -25,8 +25,12 @@ const modulePathPlugin = {
     });
 
     build.onLoad({ filter: /.*/, namespace: 'modulePath' }, (args) => {
-      // Return the file path as a default export
-      const outputPath = args.path.replace(/\.ts$/, '.js');
+      // Get the filename from the path
+      const filename = args.path.split('/').pop();
+      // Ensure it has .js extension
+      const filenameWithExt = filename.endsWith('.js') ? filename : `${filename}.js`;
+      // Return the path relative to where server-only.js will run with .js extension
+      const outputPath = `./${filenameWithExt}`;
       return {
         contents: `export default ${JSON.stringify(outputPath)};`,
         loader: 'js'
@@ -39,6 +43,7 @@ async function buildHeadlessServer() {
   try {
     console.log('Building headless server...');
     
+    // Build the main server
     await build({
       entryPoints: [resolve(__dirname, '../src/main/server-only.ts')],
       bundle: true,
@@ -65,7 +70,77 @@ async function buildHeadlessServer() {
       }
     });
     
+    // Build the WebSocket worker as a separate bundle
+    await build({
+      entryPoints: [resolve(__dirname, '../src/main/stores/platforms/websocket/wsWebsocket.ts')],
+      bundle: true,
+      platform: 'node',
+      target: 'node18',
+      format: 'esm',
+      outfile: resolve(__dirname, '../dist/wsWebsocket.js'),
+      external: [
+        'sharp',
+        '@deskthing/types'
+      ],
+      alias: {
+        '@shared': resolve(__dirname, '../src/shared'),
+        '@server': resolve(__dirname, '../src/main'),
+        '@processes': resolve(__dirname, '../src/main/processes')
+      },
+      banner: {
+        js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
+      }
+    });
+    
+    // Build the app process worker as a separate bundle
+    await build({
+      entryPoints: [resolve(__dirname, '../src/main/processes/appProcess.ts')],
+      bundle: true,
+      platform: 'node',
+      target: 'node18',
+      format: 'esm',
+      outfile: resolve(__dirname, '../dist/appProcess.js'),
+      external: [
+        'sharp',
+        '@deskthing/types'
+      ],
+      alias: {
+        '@shared': resolve(__dirname, '../src/shared'),
+        '@server': resolve(__dirname, '../src/main'),
+        '@processes': resolve(__dirname, '../src/main/processes')
+      },
+      banner: {
+        js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
+      }
+    });
+    
+    // Build the flash process worker as a separate bundle
+    await build({
+      entryPoints: [resolve(__dirname, '../src/main/processes/flashProcess.ts')],
+      bundle: true,
+      platform: 'node',
+      target: 'node18',
+      format: 'esm',
+      outfile: resolve(__dirname, '../dist/flashProcess.js'),
+      external: [
+        'sharp',
+        'flashthing',
+        '@deskthing/types'
+      ],
+      alias: {
+        '@shared': resolve(__dirname, '../src/shared'),
+        '@server': resolve(__dirname, '../src/main'),
+        '@processes': resolve(__dirname, '../src/main/processes')
+      },
+      banner: {
+        js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
+      }
+    });
+    
     console.log('✓ Headless server built successfully at dist/server-only.js');
+    console.log('✓ WebSocket worker built successfully at dist/wsWebsocket.js');
+    console.log('✓ App process worker built successfully at dist/appProcess.js');
+    console.log('✓ Flash process worker built successfully at dist/flashProcess.js');
   } catch (error) {
     console.error('Build failed:', error);
     process.exit(1);
